@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Demo</title>
+    <style>
+      #small {
+        width: 25%;
+      }
+      #medium {
+        width: 50%;
+      }
+      #large {
+        width: 100%;
+      }
+      a {
+        background-color: #f00;
+        display: block;
+        line-height: 100px;
+        text-align: center;
+      }
+      a:media(min-width: 401px) {
+        background-color: #0f0;
+      }
+      a:media(min-width: 801px) {
+        background-color: #00f;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="small">
+      <a href="#">test</a>
+    </div>
+
+    <div id="medium">
+      <a href="#">test</a>
+    </div>
+
+    <div id="large">
+      <a href="#">test</a>
+    </div>
+
+    <script src="../dist/elq.js"></script>
+    <script>elq.process();</script>
+  </body>
+</html>

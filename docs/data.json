@@ -1,0 +1,337 @@
+{
+    "project": {
+        "name": "elq",
+        "description": "element query parser",
+        "version": "0.0.0",
+        "url": "http://"
+    },
+    "files": {
+        "src/elq.src.js": {
+            "name": "src/elq.src.js",
+            "modules": {},
+            "classes": {
+                "elq": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "elq": {
+            "name": "elq",
+            "shortname": "elq",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/elq.src.js",
+            "line": 9,
+            "description": "Parses CSS for element queries and implements them with JavaScript",
+            "params": [
+                {
+                    "name": "elq",
+                    "description": "The elq module for loose augmentation",
+                    "type": "Object"
+                },
+                {
+                    "name": "document",
+                    "description": "document object for DOM manipulation",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The augmented elq module",
+                "type": "Object"
+            }
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/elq.src.js",
+            "line": 1,
+            "title": "elq.js",
+            "overview": "Parses CSS for element queries, supports them in JavaScript",
+            "copyright": "(c) 2014",
+            "license": "CC BY (http://creativecommons.org/licenses/by/4.0/)",
+            "author": "Art Lawry",
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 23,
+            "description": "Allows pre-processing after a window resize with less resources",
+            "itemtype": "property",
+            "name": "resizeTimeout",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "default": "undefined",
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 33,
+            "description": "The number of links remaining to be fetched and rendered locally",
+            "itemtype": "property",
+            "name": "remainingLinks",
+            "access": "private",
+            "tagname": "",
+            "type": "Number",
+            "default": "0",
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 43,
+            "description": "A hash of cached links to avoid re-fetching",
+            "itemtype": "property",
+            "name": "cachedLinks",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "default": "{}",
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 53,
+            "description": "A hash of registered media queries to avoid duplication",
+            "itemtype": "property",
+            "name": "registeredSelectors",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "default": "{}",
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 63,
+            "description": "A regular expression for finding valid element queries",
+            "itemtype": "property",
+            "name": "validelq",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "default": "{}",
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 95,
+            "description": "The number of pixels corresponding to one rem at context change time",
+            "itemtype": "property",
+            "name": "pixelsPerREM",
+            "access": "private",
+            "tagname": "",
+            "type": "Number",
+            "default": "undefined",
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 105,
+            "description": "An object to store private methods",
+            "itemtype": "property",
+            "name": "privateMethods",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "default": "{}",
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 117,
+            "description": "Fetch an external CSS link and render it as an inline style element",
+            "itemtype": "method",
+            "name": "fetchExternalCSS",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "link",
+                    "description": "The link to fetch",
+                    "type": "DOM Object"
+                }
+            ],
+            "return": {
+                "description": "True if link was fetched",
+                "type": "Boolean"
+            },
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 170,
+            "description": "Removes generated style and fetched css from internal cache",
+            "itemtype": "method",
+            "name": "unfetchExternalCSS",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "link",
+                    "description": "The link that was fetched",
+                    "type": "DOM Object"
+                }
+            ],
+            "return": {
+                "description": "True if style was deleted",
+                "type": "Boolean"
+            },
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 197,
+            "description": "Loop through each selector and process matching elements",
+            "itemtype": "method",
+            "name": "applyContext",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "True if any selectors were found",
+                "type": "Boolean"
+            },
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 282,
+            "description": "Listen for context change and modify all selectors",
+            "itemtype": "method",
+            "name": "respondToContext",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "True if any selectors were found",
+                "type": "Boolean"
+            },
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 309,
+            "description": "Parses all CSS and registers found element queries",
+            "itemtype": "method",
+            "name": "parseCSS",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "True if any element queries were found",
+                "type": "Boolean"
+            },
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 347,
+            "description": "Converts the media query portion of an element query into a condition",
+            "itemtype": "method",
+            "name": "mediaToCondition",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "media",
+                    "description": "The media query portion of the element query",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The modified condition",
+                "type": "String"
+            },
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 398,
+            "description": "Registers an element query",
+            "itemtype": "method",
+            "name": "register",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "The selector matching this element query",
+                    "type": "String"
+                },
+                {
+                    "name": "media",
+                    "description": "The media matching this element query",
+                    "type": "String"
+                },
+                {
+                    "name": "elqClass",
+                    "description": "Optional predetermined class to apply",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The class associated with this element query",
+                "type": "String"
+            },
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 441,
+            "description": "Unregisters an element query",
+            "itemtype": "method",
+            "name": "unregister",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "The selector matching this element query",
+                    "type": "String"
+                },
+                {
+                    "name": "media",
+                    "description": "The media matching this element query",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "True if selector existed",
+                "type": "Boolean"
+            },
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 466,
+            "description": "Processes the entire page for element queries",
+            "itemtype": "method",
+            "name": "process",
+            "params": [
+                {
+                    "name": "Option",
+                    "description": "array of DOM links to process",
+                    "type": "Array"
+                }
+            ],
+            "class": "elq"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: overview",
+            "line": " src/elq.src.js:1"
+        },
+        {
+            "message": "unknown tag: copyright",
+            "line": " src/elq.src.js:1"
+        },
+        {
+            "message": "unknown tag: license",
+            "line": " src/elq.src.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/elq.src.js:1"
+        }
+    ]
+}

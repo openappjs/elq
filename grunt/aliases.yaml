@@ -1,0 +1,10 @@
+default:
+  - 'concat:dist'
+  - 'jshint'
+  - 'yuidoc'
+  - 'uglify'
+  - 'concat:test'
+  - 'connect'
+  - 'mocha_phantomjs'
+  - 'strip_code'
+  - 'asciify'

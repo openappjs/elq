@@ -1,0 +1,24 @@
+.w400px {
+  width: 400px;
+}
+.w800px {
+  width: 800px;
+}
+#small {
+  width: 25%;
+}
+#medium {
+  width: 50%;
+}
+#large {
+  width: 100%;
+}
+a {
+  color: #f00;
+}
+a:media(min-width: 101px) {
+  color: #0f0;
+}
+a:media(min-width: 201px) {
+  color: #00f;
+}
