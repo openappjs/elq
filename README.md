@@ -36,9 +36,9 @@ SELECTOR:media(MEDIASYNTAX) {
 
 MEDIASYNTAX can be any combination of comma (or) or and separated parentheseticals  with the following properties:
 
-* width, min-width, max-width
-* height, min-height, max-height
-* aspect-ratio, min-aspect-ratio, max-aspect-ratio
+* `width`, `min-width`, `max-width`
+* `height`, `min-height`, `max-height`
+* `aspect-ratio`, `min-aspect-ratio`, `max-aspect-ratio`
 
 You can use any other media properties by nesting an element-query in a media-query targeting those properties.
 
@@ -56,8 +56,8 @@ At the bottom of your page, include the following.
 `elq.process()` will iterate through all CSS in the page and do the following:
 
 * fetch external css (won't work in a file:// context)
-* add local <style> tag immediately after external css containing external css
-* modify all <style> tag contents replacing element-queries with classes
+* add local `<style>` tag immediately after external css containing external css
+* modify all `<style>` tag contents replacing element-queries with classes
 * evaluate contexts on window resize or orientatin change and modify classes
 
 If you need to dynamically add css after initial page load, just run `elq.process()` again after the new css has been added.
