@@ -47,7 +47,7 @@ You can use any other media properties by nesting an element-query in a media-qu
 At the bottom of your page, include the following.
 
 ```html
-<script src="elq.js"></scrip>
+<script src="elq.js"></script>
 <script>
   elq.process();
 </script>
