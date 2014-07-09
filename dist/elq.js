@@ -69,7 +69,7 @@ window.elq = (function (elq, document) {
      * @default {}
      */
     validelq = new RegExp(
-      '\\s*([^,}])+' + // selector
+      '\\s*([^,}]+)' + // selector
       '\\:media\\(' + // :media(
         '(' + // capture
           '(?:' + // pattern or simple
