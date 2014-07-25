@@ -16,7 +16,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png">elq: elq</a></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.0</em>
+            <em>API Docs for: 0.1.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -65,6 +65,8 @@
                 <li><a href="#methods_process">process</a></li>
             
                 <li><a href="#methods_register">register</a></li>
+            
+                <li><a href="#methods_respondAfter">respondAfter</a></li>
             
                 <li><a href="#methods_respondToContext">respondToContext</a></li>
             
@@ -131,7 +133,7 @@
     
         
     
-        <a href="../../files/src_elq.src.js.html#l197"><code>src&#x2F;elq.src.js:197</code></a>
+        <a href="../../files/src_elq.src.js.html#l207"><code>src&#x2F;elq.src.js:207</code></a>
     </span><br>
     <p>Loop through each selector and process matching elements</p>
 
@@ -154,7 +156,7 @@
     
         
     
-        <a href="../../files/src_elq.src.js.html#l117"><code>src&#x2F;elq.src.js:117</code></a>
+        <a href="../../files/src_elq.src.js.html#l127"><code>src&#x2F;elq.src.js:127</code></a>
     </span><br>
     <p>Fetch an external CSS link and render it as an inline style element</p>
 
@@ -192,7 +194,7 @@
     
         
     
-        <a href="../../files/src_elq.src.js.html#l347"><code>src&#x2F;elq.src.js:347</code></a>
+        <a href="../../files/src_elq.src.js.html#l366"><code>src&#x2F;elq.src.js:366</code></a>
     </span><br>
     <p>Converts the media query portion of an element query into a condition</p>
 
@@ -230,7 +232,7 @@
     
         
     
-        <a href="../../files/src_elq.src.js.html#l309"><code>src&#x2F;elq.src.js:309</code></a>
+        <a href="../../files/src_elq.src.js.html#l328"><code>src&#x2F;elq.src.js:328</code></a>
     </span><br>
     <p>Parses all CSS and registers found element queries</p>
 
@@ -247,13 +249,13 @@
             
                 <a name="methods_process"></a>
 <div class="method item">
-     <strong class="name"><code>process</code></strong>( <code>Option </code> ) 
+    Boolean <strong class="name"><code>process</code></strong>( <code>Option </code> ) 
     <br>
     <span class="foundat">
     
         
     
-        <a href="../../files/src_elq.src.js.html#l466"><code>src&#x2F;elq.src.js:466</code></a>
+        <a href="../../files/src_elq.src.js.html#l485"><code>src&#x2F;elq.src.js:485</code></a>
     </span><br>
     <p>Processes the entire page for element queries</p>
 
@@ -275,6 +277,11 @@
     
     
     
+    <br><div class="returns"><strong>Returns:</strong> &lt;Boolean&gt; <p>True</p>
+</div>
+    
+    
+    
 </div>
 
             
@@ -286,7 +293,7 @@
     
         
     
-        <a href="../../files/src_elq.src.js.html#l398"><code>src&#x2F;elq.src.js:398</code></a>
+        <a href="../../files/src_elq.src.js.html#l417"><code>src&#x2F;elq.src.js:417</code></a>
     </span><br>
     <p>Registers an element query</p>
 
@@ -336,6 +343,44 @@
 </div>
 
             
+                <a name="methods_respondAfter"></a>
+<div class="method item">
+    Number <strong class="name"><code>respondAfter</code></strong>( <code>Milliseconds </code> ) 
+    <br>
+    <span class="foundat">
+    
+        
+    
+        <a href="../../files/src_elq.src.js.html#l512"><code>src&#x2F;elq.src.js:512</code></a>
+    </span><br>
+    <p>Adjust how often a resize/orientation event will throttle</p>
+
+    
+    <strong>Parameters:</strong>
+    <ul class="params">
+    
+        <li>
+        
+            <code>Milliseconds</code> <strong>&lt;Number&gt;</strong>
+        
+        
+        <p>after which to render</p>
+
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    <br><div class="returns"><strong>Returns:</strong> &lt;Number&gt; <p>Milliseconds after which to render</p>
+</div>
+    
+    
+    
+</div>
+
+            
                 <a name="methods_respondToContext"></a>
 <div class="method item private">
     Boolean <strong class="name"><code>respondToContext</code></strong>( <code>  </code> ) <em><code>&#x2F;* private method *&#x2F;</code></em>
@@ -344,7 +389,7 @@
     
         
     
-        <a href="../../files/src_elq.src.js.html#l282"><code>src&#x2F;elq.src.js:282</code></a>
+        <a href="../../files/src_elq.src.js.html#l292"><code>src&#x2F;elq.src.js:292</code></a>
     </span><br>
     <p>Listen for context change and modify all selectors</p>
 
@@ -367,7 +412,7 @@
     
         
     
-        <a href="../../files/src_elq.src.js.html#l170"><code>src&#x2F;elq.src.js:170</code></a>
+        <a href="../../files/src_elq.src.js.html#l180"><code>src&#x2F;elq.src.js:180</code></a>
     </span><br>
     <p>Removes generated style and fetched css from internal cache</p>
 
@@ -405,7 +450,7 @@
     
         
     
-        <a href="../../files/src_elq.src.js.html#l441"><code>src&#x2F;elq.src.js:441</code></a>
+        <a href="../../files/src_elq.src.js.html#l460"><code>src&#x2F;elq.src.js:460</code></a>
     </span><br>
     <p>Unregisters an element query</p>
 
@@ -453,7 +498,7 @@
                 <a name="props_cachedLinks"></a>
 <div class="props item">
     <code>cachedLinks</code> &lt;<strong>Object</strong>&gt;<br>
-    <span class="foundat"><a href="../../files/src_elq.src.js.html#l43"><code>src&#x2F;elq.src.js:43</code></a></span>
+    <span class="foundat"><a href="../../files/src_elq.src.js.html#l53"><code>src&#x2F;elq.src.js:53</code></a></span>
     <p>A hash of cached links to avoid re-fetching</p>
 
     
@@ -463,7 +508,7 @@
                 <a name="props_pixelsPerREM"></a>
 <div class="props item">
     <code>pixelsPerREM</code> &lt;<strong>Number</strong>&gt;<br>
-    <span class="foundat"><a href="../../files/src_elq.src.js.html#l95"><code>src&#x2F;elq.src.js:95</code></a></span>
+    <span class="foundat"><a href="../../files/src_elq.src.js.html#l105"><code>src&#x2F;elq.src.js:105</code></a></span>
     <p>The number of pixels corresponding to one rem at context change time</p>
 
     
@@ -473,7 +518,7 @@
                 <a name="props_privateMethods"></a>
 <div class="props item">
     <code>privateMethods</code> &lt;<strong>Object</strong>&gt;<br>
-    <span class="foundat"><a href="../../files/src_elq.src.js.html#l105"><code>src&#x2F;elq.src.js:105</code></a></span>
+    <span class="foundat"><a href="../../files/src_elq.src.js.html#l115"><code>src&#x2F;elq.src.js:115</code></a></span>
     <p>An object to store private methods</p>
 
     
@@ -483,7 +528,7 @@
                 <a name="props_registeredSelectors"></a>
 <div class="props item">
     <code>registeredSelectors</code> &lt;<strong>Object</strong>&gt;<br>
-    <span class="foundat"><a href="../../files/src_elq.src.js.html#l53"><code>src&#x2F;elq.src.js:53</code></a></span>
+    <span class="foundat"><a href="../../files/src_elq.src.js.html#l63"><code>src&#x2F;elq.src.js:63</code></a></span>
     <p>A hash of registered media queries to avoid duplication</p>
 
     
@@ -493,16 +538,26 @@
                 <a name="props_remainingLinks"></a>
 <div class="props item">
     <code>remainingLinks</code> &lt;<strong>Number</strong>&gt;<br>
-    <span class="foundat"><a href="../../files/src_elq.src.js.html#l33"><code>src&#x2F;elq.src.js:33</code></a></span>
+    <span class="foundat"><a href="../../files/src_elq.src.js.html#l43"><code>src&#x2F;elq.src.js:43</code></a></span>
     <p>The number of links remaining to be fetched and rendered locally</p>
 
     
 </div>
 
             
-                <a name="props_resizeTimeout"></a>
+                <a name="props_respondAfter"></a>
 <div class="props item">
-    <code>resizeTimeout</code> &lt;<strong>Object</strong>&gt;<br>
+    <code>respondAfter</code> &lt;<strong>Number</strong>&gt;<br>
+    <span class="foundat"><a href="../../files/src_elq.src.js.html#l33"><code>src&#x2F;elq.src.js:33</code></a></span>
+    <p>Default value for milliseconds after a resize/orientation to respond</p>
+
+    
+</div>
+
+            
+                <a name="props_respondTimeout"></a>
+<div class="props item">
+    <code>respondTimeout</code> &lt;<strong>Object</strong>&gt;<br>
     <span class="foundat"><a href="../../files/src_elq.src.js.html#l23"><code>src&#x2F;elq.src.js:23</code></a></span>
     <p>Allows pre-processing after a window resize with less resources</p>
 
@@ -513,7 +568,7 @@
                 <a name="props_validelq"></a>
 <div class="props item">
     <code>validelq</code> &lt;<strong>Object</strong>&gt;<br>
-    <span class="foundat"><a href="../../files/src_elq.src.js.html#l63"><code>src&#x2F;elq.src.js:63</code></a></span>
+    <span class="foundat"><a href="../../files/src_elq.src.js.html#l73"><code>src&#x2F;elq.src.js:73</code></a></span>
     <p>A regular expression for finding valid element queries</p>
 
     

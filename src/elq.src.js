@@ -23,12 +23,22 @@ window.elq = (function (elq, document) {
     /**
      * Allows pre-processing after a window resize with less resources
      *
-     * @property resizeTimeout
+     * @property respondTimeout
      * @private
      * @type Object
      * @default undefined
      */
-    resizeTimeout,
+    respondTimeout,
+
+    /**
+     * Default value for milliseconds after a resize/orientation to respond
+     *
+     * @property respondAfter
+     * @private
+     * @type Number
+     * @default 100
+     */
+    respondAfter = 100,
 
     /**
      * The number of links remaining to be fetched and rendered locally
@@ -289,8 +299,17 @@ window.elq = (function (elq, document) {
   privateMethods.respondToContext = function () {
     var
       respondAfterTimeout = function respondAfterTimeout() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(privateMethods.respondToContext, 300);
+        var
+          lastClientWidth = document.lastClientWidth || 0,
+          lastClientHeight = document.lastClientHeight || 0;
+
+        if (document.clientWidth !== lastClientWidth ||
+          document.clientHeight !== lastClientHeight) {
+          clearTimeout(respondTimeout);
+          respondTimeout = setTimeout(privateMethods.respondToContext, 100);
+          document.lastClientWidth = document.clientWidth;
+          document.lastClientHeight = document.clientHeight;
+        }
       };
 
     pixelsPerREM = document.defaultView.getComputedStyle(
@@ -404,7 +423,7 @@ window.elq = (function (elq, document) {
    * @param  {String} elqClass Optional predetermined class to apply
    * @return {String}          The class associated with this element query
    */
-  elq.register = function register(selector, media, elqClass) {
+  elq.register = function (selector, media, elqClass) {
 
     if (selector && media) {
       if (!elqClass) {
@@ -446,7 +465,7 @@ window.elq = (function (elq, document) {
    * @param  {String} media    The media matching this element query
    * @return {Boolean}         True if selector existed
    */
-  elq.unregister = function unregister(selector, media) {
+  elq.unregister = function (selector, media) {
     var
       success = false;
 
@@ -467,9 +486,10 @@ window.elq = (function (elq, document) {
    * Processes the entire page for element queries
    *
    * @method process
-   * @param {Array} Option array of DOM links to process
+   * @param  {Array} Option array of DOM links to process
+   * @return {Boolean} True
    */
-  elq.process = function process(links) {
+  elq.process = function (links) {
     var
       length,
       index;
@@ -487,6 +507,17 @@ window.elq = (function (elq, document) {
     }
 
     return true;
+  };
+
+  /**
+   * Adjust how often a resize/orientation event will throttle
+   *
+   * @method respondAfter
+   * @param  {Number} Milliseconds after which to render
+   * @return {Number} Milliseconds after which to render
+   */
+  elq.respondAfter = function (milliseconds) {
+    return respondAfter = +milliseconds >= 0 ? milliseconds : respondAfter;
   };
 
   return elq;

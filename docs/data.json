@@ -2,7 +2,7 @@
     "project": {
         "name": "elq",
         "description": "element query parser",
-        "version": "0.0.0",
+        "version": "0.1.0",
         "url": "http://"
     },
     "files": {
@@ -63,7 +63,7 @@
             "line": 23,
             "description": "Allows pre-processing after a window resize with less resources",
             "itemtype": "property",
-            "name": "resizeTimeout",
+            "name": "respondTimeout",
             "access": "private",
             "tagname": "",
             "type": "Object",
@@ -73,6 +73,18 @@
         {
             "file": "src/elq.src.js",
             "line": 33,
+            "description": "Default value for milliseconds after a resize/orientation to respond",
+            "itemtype": "property",
+            "name": "respondAfter",
+            "access": "private",
+            "tagname": "",
+            "type": "Number",
+            "default": "100",
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 43,
             "description": "The number of links remaining to be fetched and rendered locally",
             "itemtype": "property",
             "name": "remainingLinks",
@@ -84,7 +96,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 43,
+            "line": 53,
             "description": "A hash of cached links to avoid re-fetching",
             "itemtype": "property",
             "name": "cachedLinks",
@@ -96,7 +108,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 53,
+            "line": 63,
             "description": "A hash of registered media queries to avoid duplication",
             "itemtype": "property",
             "name": "registeredSelectors",
@@ -108,7 +120,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 63,
+            "line": 73,
             "description": "A regular expression for finding valid element queries",
             "itemtype": "property",
             "name": "validelq",
@@ -120,7 +132,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 95,
+            "line": 105,
             "description": "The number of pixels corresponding to one rem at context change time",
             "itemtype": "property",
             "name": "pixelsPerREM",
@@ -132,7 +144,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 105,
+            "line": 115,
             "description": "An object to store private methods",
             "itemtype": "property",
             "name": "privateMethods",
@@ -144,7 +156,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 117,
+            "line": 127,
             "description": "Fetch an external CSS link and render it as an inline style element",
             "itemtype": "method",
             "name": "fetchExternalCSS",
@@ -165,7 +177,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 170,
+            "line": 180,
             "description": "Removes generated style and fetched css from internal cache",
             "itemtype": "method",
             "name": "unfetchExternalCSS",
@@ -186,7 +198,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 197,
+            "line": 207,
             "description": "Loop through each selector and process matching elements",
             "itemtype": "method",
             "name": "applyContext",
@@ -200,7 +212,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 282,
+            "line": 292,
             "description": "Listen for context change and modify all selectors",
             "itemtype": "method",
             "name": "respondToContext",
@@ -214,7 +226,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 309,
+            "line": 328,
             "description": "Parses all CSS and registers found element queries",
             "itemtype": "method",
             "name": "parseCSS",
@@ -228,7 +240,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 347,
+            "line": 366,
             "description": "Converts the media query portion of an element query into a condition",
             "itemtype": "method",
             "name": "mediaToCondition",
@@ -249,7 +261,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 398,
+            "line": 417,
             "description": "Registers an element query",
             "itemtype": "method",
             "name": "register",
@@ -278,7 +290,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 441,
+            "line": 460,
             "description": "Unregisters an element query",
             "itemtype": "method",
             "name": "unregister",
@@ -302,7 +314,7 @@
         },
         {
             "file": "src/elq.src.js",
-            "line": 466,
+            "line": 485,
             "description": "Processes the entire page for element queries",
             "itemtype": "method",
             "name": "process",
@@ -313,6 +325,29 @@
                     "type": "Array"
                 }
             ],
+            "return": {
+                "description": "True",
+                "type": "Boolean"
+            },
+            "class": "elq"
+        },
+        {
+            "file": "src/elq.src.js",
+            "line": 512,
+            "description": "Adjust how often a resize/orientation event will throttle",
+            "itemtype": "method",
+            "name": "respondAfter",
+            "params": [
+                {
+                    "name": "Milliseconds",
+                    "description": "after which to render",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Milliseconds after which to render",
+                "type": "Number"
+            },
             "class": "elq"
         }
     ],
