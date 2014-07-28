@@ -206,6 +206,13 @@ window.elq = (function (elq, document) {
   /**
    * Loop through each selector and process matching elements
    *
+   * Fires an 'elq-change' event if any classes are added or removed by elq.
+   * Custom event contains:
+   *   event.detail.contextHeight
+   *   event.detail.contextWidth
+   *   event.detail.addedClasses
+   *   event.detail.removedClasses
+   *
    * @method applyContext
    * @private
    * @return {Boolean} True if any selectors were found
@@ -229,17 +236,40 @@ window.elq = (function (elq, document) {
         registeredSelector = registeredSelectors[selector],
         conditions         = Object.keys(registeredSelector),
         length             = conditions.length,
+        added              = [],
+        removed            = [],
+        changed,
         index;
 
       for (index = 0; index < length; index += 1) {
 
-        registeredSelector[conditions[index]](
+        changed = registeredSelector[conditions[index]](
           parentWidth,
           parentHeight,
           element,
           pixelsPerEM,
           pixelsPerREM
         );
+
+        added = added.concat(changed.added);
+        removed = removed.concat(changed.removed);
+
+      }
+
+      if (added.length || removed.length) {
+        var event = document.createEvent('CustomEvent');
+        event.initCustomEvent(
+          'elq-change',
+          true,
+          true,
+          {
+            'addedClasses': added,
+            'removedClasses': removed,
+            'contextWidth': parentWidth,
+            'contextHeight': parentHeight
+          }
+        );
+        element.dispatchEvent(event);
       }
     };
 
@@ -266,7 +296,7 @@ window.elq = (function (elq, document) {
         parentWidth  += (2 * (parseInt(parent.style.padding, 10) || 0));
         parentWidth  += parseInt(parent.style.paddingLeft, 10) || 0;
         parentWidth  += parseInt(parent.style.paddingRight, 10) || 0;
-        parentHeight = parent.clientHeigparentHeightt;
+        parentHeight = parent.clientHeight;
         parentHeight += (2 * (parseInt(parent.style.padding, 10) || 0));
         parentHeight += parseInt(parent.style.paddingTop, 10) || 0;
         parentHeight += parseInt(parent.style.paddingBottom, 10) || 0;
@@ -440,14 +470,32 @@ window.elq = (function (elq, document) {
       registeredSelectors[selector][media] =
         new Function( // jshint ignore:line
           'elw', 'elh', 'el', 'pxpem', 'pxprem', // params
-          'el.className = el.className.replace(' +
-            '/(^|\\s)' + elqClass + '($|\\s)/g,' +
-            '\'$2\'' +
-          ');' +
+          'var ' +
+            'changed = { added: [], removed: [] },' +
+            'classes = el.className.split(/\\s+/),' +
+            'exists,' +
+            'i,' +
+            'len = classes.length;' +
+          'for (i = 0; i < len; i += 1) {' +
+            'if (classes[i] === \'' + elqClass + '\') {' +
+              'exists = i + 1;' +
+            '}' +
+          '}' +
           'if (' + privateMethods.mediaToCondition(media) + ') {' +
-            'el.className += el.className ? \' \' : \'\';' +
-            'el.className += \'' + elqClass + '\';' +
-          '}'
+            'if (!exists) {' +
+              'classes.push(\'' + elqClass + '\');' +
+              'changed.added.push(\'' + elqClass + '\');' +
+            '}' +
+          '} else {' +
+            'if (exists) {' +
+              'classes.splice(exists - 1, 1);' +
+              'changed.removed.push(\'' + elqClass + '\');' +
+            '}' +
+          '}' +
+          'if (changed.added.length || changed.removed.length) {' +
+            'el.className = classes.join(\' \');' +
+          '}' +
+          'return changed;'
         );
     }
 

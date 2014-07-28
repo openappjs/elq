@@ -16,7 +16,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png">elq: src/elq.src.js</a></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -281,6 +281,13 @@ window.elq = (function (elq, document) {
   /**
    * Loop through each selector and process matching elements
    *
+   * Fires an &#x27;elq-change&#x27; event if any classes are added or removed by elq.
+   * Custom event contains:
+   *   event.detail.contextHeight
+   *   event.detail.contextWidth
+   *   event.detail.addedClasses
+   *   event.detail.removedClasses
+   *
    * @method applyContext
    * @private
    * @return {Boolean} True if any selectors were found
@@ -304,17 +311,40 @@ window.elq = (function (elq, document) {
         registeredSelector = registeredSelectors[selector],
         conditions         = Object.keys(registeredSelector),
         length             = conditions.length,
+        added              = [],
+        removed            = [],
+        changed,
         index;
 
       for (index = 0; index &lt; length; index += 1) {
 
-        registeredSelector[conditions[index]](
+        changed = registeredSelector[conditions[index]](
           parentWidth,
           parentHeight,
           element,
           pixelsPerEM,
           pixelsPerREM
         );
+
+        added = added.concat(changed.added);
+        removed = removed.concat(changed.removed);
+
+      }
+
+      if (added.length || removed.length) {
+        var event = document.createEvent(&#x27;CustomEvent&#x27;);
+        event.initCustomEvent(
+          &#x27;elq-change&#x27;,
+          true,
+          true,
+          {
+            &#x27;addedClasses&#x27;: added,
+            &#x27;removedClasses&#x27;: removed,
+            &#x27;contextWidth&#x27;: parentWidth,
+            &#x27;contextHeight&#x27;: parentHeight
+          }
+        );
+        element.dispatchEvent(event);
       }
     };
 
@@ -341,7 +371,7 @@ window.elq = (function (elq, document) {
         parentWidth  += (2 * (parseInt(parent.style.padding, 10) || 0));
         parentWidth  += parseInt(parent.style.paddingLeft, 10) || 0;
         parentWidth  += parseInt(parent.style.paddingRight, 10) || 0;
-        parentHeight = parent.clientHeigparentHeightt;
+        parentHeight = parent.clientHeight;
         parentHeight += (2 * (parseInt(parent.style.padding, 10) || 0));
         parentHeight += parseInt(parent.style.paddingTop, 10) || 0;
         parentHeight += parseInt(parent.style.paddingBottom, 10) || 0;
@@ -515,14 +545,32 @@ window.elq = (function (elq, document) {
       registeredSelectors[selector][media] =
         new Function( // jshint ignore:line
           &#x27;elw&#x27;, &#x27;elh&#x27;, &#x27;el&#x27;, &#x27;pxpem&#x27;, &#x27;pxprem&#x27;, // params
-          &#x27;el.className = el.className.replace(&#x27; +
-            &#x27;/(^|\\s)&#x27; + elqClass + &#x27;($|\\s)/g,&#x27; +
-            &#x27;\&#x27;$2\&#x27;&#x27; +
-          &#x27;);&#x27; +
+          &#x27;var &#x27; +
+            &#x27;changed = { added: [], removed: [] },&#x27; +
+            &#x27;classes = el.className.split(/\\s+/),&#x27; +
+            &#x27;exists,&#x27; +
+            &#x27;i,&#x27; +
+            &#x27;len = classes.length;&#x27; +
+          &#x27;for (i = 0; i &lt; len; i += 1) {&#x27; +
+            &#x27;if (classes[i] === \&#x27;&#x27; + elqClass + &#x27;\&#x27;) {&#x27; +
+              &#x27;exists = i + 1;&#x27; +
+            &#x27;}&#x27; +
+          &#x27;}&#x27; +
           &#x27;if (&#x27; + privateMethods.mediaToCondition(media) + &#x27;) {&#x27; +
-            &#x27;el.className += el.className ? \&#x27; \&#x27; : \&#x27;\&#x27;;&#x27; +
-            &#x27;el.className += \&#x27;&#x27; + elqClass + &#x27;\&#x27;;&#x27; +
-          &#x27;}&#x27;
+            &#x27;if (!exists) {&#x27; +
+              &#x27;classes.push(\&#x27;&#x27; + elqClass + &#x27;\&#x27;);&#x27; +
+              &#x27;changed.added.push(\&#x27;&#x27; + elqClass + &#x27;\&#x27;);&#x27; +
+            &#x27;}&#x27; +
+          &#x27;} else {&#x27; +
+            &#x27;if (exists) {&#x27; +
+              &#x27;classes.splice(exists - 1, 1);&#x27; +
+              &#x27;changed.removed.push(\&#x27;&#x27; + elqClass + &#x27;\&#x27;);&#x27; +
+            &#x27;}&#x27; +
+          &#x27;}&#x27; +
+          &#x27;if (changed.added.length || changed.removed.length) {&#x27; +
+            &#x27;el.className = classes.join(\&#x27; \&#x27;);&#x27; +
+          &#x27;}&#x27; +
+          &#x27;return changed;&#x27;
         );
     }
 
