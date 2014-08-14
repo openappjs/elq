@@ -1,6 +1,7 @@
 {
   "name": "elq",
   "description": "element query parser",
+  "main": "dist/elq.min.js",
   "version": "0.2.0",
   "homepage": "http://",
   "devDependencies": {
